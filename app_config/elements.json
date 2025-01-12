@@ -1,0 +1,23 @@
+{
+    "ihelse_user_input": "//input[@type='email']",
+    "ihelse_user_next": "//input[@type='submit']",
+    "ihelse_pwd_input": "//input[@type='password']",
+    "ihelse_pwd_next": "//input[@type='submit']",
+
+    "ihelse_staylogin_btn": "//input[@type='button']",
+
+    "gat_user_input": "//input[@name='username']",
+    "gat_pwd_input": "//input[@name='password']",
+    "gat_login_btn": "//button[@id='btnLoginPage1']",
+
+    "cookie_close_btn": "//div[@id='cookieDisclaimerDiv']//button",
+    "vaktbok_btn": "//span[@class='quick-nav-icon icon-shiftbook']",
+    "vaktbok_weekview": "//div[@class='ui-icon icon-calendar-week']",
+
+    "week_info_container": "//span[@class='caption' and contains(text(), 'Uke')]",
+    "sort_by_name_btn": "(//td[@role='columnheader'])[1]",
+    "print_week_btn": "//div[@data-bind='click: PrintLogic()']",
+    "next_week_btn": "(//div[@role='button'])[2]",
+
+    "week_table" : "(//tbody)[8]"
+}
