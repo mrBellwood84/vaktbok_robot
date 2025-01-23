@@ -6,10 +6,19 @@ Any new or changed shifts are stored to an sql database with a timestamp for ext
 
 Note this robot is using the Edge web browser. Certain files are excluded for security reasons.
 
-**store_workbook_weekly.py** is an aditional script created for priting out the workbook as a pdf file through the pages own print functionality.
+_(depricated)_ **store_workbook_weekly.py** is an aditional script created for priting out the workbook as a pdf file through the pages own print functionality.
 Will open the **_print to file_** dialog in the browers and also add the suggested file name to the system clipboard.
 User can use the **[CTRL + V]** function directly in the dialog to set file name :)
 
+### Arguments
+Adding arguments will decide program behaviour. If no arguments are added, robot will run with **harvest** argument.
+
+- **help** : Runs help menu _(not implemented)_.
+- **backup** : Store data tables from database to CVS files in backup folder.
+- **login** : Login only, keeps browser window open untill user promt close in command line.
+- **harvest** : Login and start harvest from current week.
+- **wait_harvest** : Login and wait harvest until user promt start in command line. Use for setting start week.
+- **workbook** : Store workbook as described above.
 
 ## Files exluded
 

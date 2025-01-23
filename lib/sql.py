@@ -22,7 +22,6 @@ class MySqlConnection:
         result = self.cursor.fetchone()
         return result
 
-
     def query_all(self, query: str, values: tuple = ()):
         self.cursor.execute(query, values)
         result = self.cursor.fetchall()
@@ -75,19 +74,11 @@ def get_shiftcode_id(code: str, start: str, end: str):
 
     db = MySqlConnection()
 
-    # code_str = code_str.split("(")
-    # if len(code_str) == 1: code_str = [code_str[0], code_str[0]]
-    # code = str(code_str[0]).strip()
-
     query = "SELECT * FROM ShiftCode WHERE code = %s"
     values = (code,)
 
     result = db.query_one(query, values)
     if result: return result[0]
-
-    # time: list[str] = [str(x).strip() for x in code_str[1].split("-")]
-    # start = time[0]
-    # end = time[1][:-1]
 
     command = "INSERT INTO ShiftCode (id, code, start, end) VALUES (%s,%s,%s,%s)"
     values = (str(uuid4()), code, start, end)
@@ -118,7 +109,6 @@ def insert_workdays(values: list[tuple]):
     db = MySqlConnection()
 
     command = "INSERT INTO Shift (id, employee_id, workday_id, shiftcode_id, timestamp) values (%s,%s,%s,%s,NOW())"
-    
     db.command_many(command, values)
 
 

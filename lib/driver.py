@@ -141,4 +141,4 @@ def __extract_xpath(keyword: str):
         except KeyError: print(f"Keyword {keyword} for element does not exists in \"app_config/elements.json\"")
 
 # return seconds for retry sleep. Set to be between 0.5 and 2 seconds
-def __rand_sec(): return randint(5, 20) / 10
+def __rand_sec(): return randint(7, 25) / 10
