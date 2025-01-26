@@ -4,12 +4,11 @@ def print_help():
     Running application with no arguments will run program with "harvest" option. 
 
     Arguments:
-    - help : Print this...
-    - backup : Store data tables from database to CVS files in backup folder.
-    - login : Login only, keeps browser window open untill user promt close in command line.
+    - backup : Store database to CVS files.
+    - login : Run login procedure only
     - harvest : Login and start harvest from current week.
-    - wait_harvest : Login and wait harvest until user promt start in command line. Use for setting start week.
+    - wait_harvest : Login and await data harvest until user promt
     - workbook : Store workbook 
-"""
+    """
 
     print(text)

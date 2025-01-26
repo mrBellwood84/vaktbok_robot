@@ -1,66 +1,17 @@
-import sys
-
-from lib.backup import DbBackup
-from lib.driver import create_driver
+import os, sys
+from dotenv import load_dotenv
+from lib.database import DbBackup
+from lib.spider import Driver, PageProcedures, WorkbookHarvest, WorkbookSave
 from lib.help import print_help
-from lib.login_procedure import login_procedure, goto_vaktbok
-from lib.spider import itterate_workweek, print_workbook_weekly
 
-from app_config.config import *
 
-FLAGS = [
-    "help",
-    "backup",
-    "login",
-    "harvest",
-    "wait_harvest",
-    "workbook"
-]
+FLAGS = ["backup", "login", "harvest", "wait_harvest", "workbook"]
 
-def run_main():
 
+def load_arg():
     args = sys.argv[1:]
-
-    if len(args) == 0: arg = "harvest"
-    else: arg = args[0].lower()
-
-    if arg not in FLAGS or arg == "help":
-        print_help()
-        return
-    
-    
-    # run db backup
-    if arg == "backup":
-        run_backup()
-        return
-
-    # create session here
-    driver, waiter = create_driver()
-    driver.get(ENTRY_URL)
-    login_procedure(driver, waiter)
-
-    # run login
-    if arg == "login":
-        input("-- Press enter to close session")
-        return
-
-    # run login with harvest from this week
-    if arg == "harvest":
-        goto_vaktbok(waiter)
-        itterate_workweek(driver, waiter)
-
-    # run login with break before harvest
-    if arg == "wait_harvest":
-        input(" -- Press Enter to start harvest")
-        goto_vaktbok(waiter)
-        itterate_workweek(driver, waiter)
-
-    if arg == "workbook":
-        input(" -- Press enter to start workbook --")
-        goto_vaktbok(waiter)
-        input(" -- Press Enter to start workbook procedure...")
-        print_workbook_weekly(driver, waiter)
-        
+    if len(args) == 0: return "harvest"
+    return args[0].lower()
 
 def run_backup():
     print("\n -- RUNNING BACKUP --")
@@ -69,6 +20,49 @@ def run_backup():
     print("-- BACKUP COMPLETE --\n")
 
 
+def main():
+    
+    arg = load_arg()
+    
+    if arg not in FLAGS:
+        print_help()
+        return
+
+    if arg == "backup":
+        run_backup()
+        return
+    
+    driver = Driver()
+    pageProc = PageProcedures(driver)
+    pageProc.login()
+
+    if arg == "login":
+        os.system("cls")
+        print("\n -- Login only session started...\n")
+        input(" -- Press 'ENTER' to close browser --")
+        return
+    
+    pageProc.gotoVaktbok()
+    os.system("cls")
+
+    if arg == "workbook":
+        print(" -- Starting workbook save session --\n")
+        workbook = WorkbookSave(driver)
+        workbook.save()
+        return
+    
+    if arg == "wait_harvest":
+        input(" -- Press 'ENTER' to start harvest ---")
+
+    if arg == "wait_harvest" or "harvest":
+        print(" -- Harvesting Vaktbok data --\n")
+        harvester = WorkbookHarvest(driver)
+        harvester.harvest()
+        return
+
+
 if __name__ == "__main__":
 
-    run_main()
+    load_dotenv()
+    
+    main()

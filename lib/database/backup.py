@@ -1,5 +1,5 @@
 import csv, datetime, os
-from lib.sql import MySqlConnection
+from lib.database.mysql import MySqlConnection
 
 class DbBackup:
 
@@ -21,7 +21,7 @@ class DbBackup:
         },    
         {
             "query": "SELECT * FROM shift",
-            "columns": ("id","employee_id", ""),
+            "columns": ("id","employee_id", "workday_id", "shiftcode_id","timestamp"),
             "filename": "backup_shift"
         },
     ]

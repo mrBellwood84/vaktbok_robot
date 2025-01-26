@@ -1,5 +1,6 @@
 __pycache__
 .env
+.venv
 /app_config/config.py
 /app_config/secret.py
 /backup

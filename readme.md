@@ -21,22 +21,11 @@ Adding argued options will decide program behaviour. If no arguments are added, 
 - **wait_harvest** : Login and wait harvest until user promt start in command line. Use for setting start week.
 - **workbook** : Store workbook
 
-## Files exluded
 
-**Files exluded**
-- *./lib/login_procedure.py*
+## Excluded files and Environment variables
+
+_Files exluded_
 - *./app_config/config.py*
-- *./app_config/secret.py*
-
-### ./lib/login_procedure.py
-
-```Python
-def login_procedure(driver: WebDriver, waiter: WebDriverWaiter):
-    # this function must navigate login procedure.
-    # used by main script to login
-    # must navigate to "vaktbok" then select week view.
-    pass
-```
 
 ### ./app_config/config.py
 
@@ -45,26 +34,21 @@ Configurations for Selenium WebDriver and date span for data harvest.
 - ENTRY_URL: string - Start url for script, login page
 - WEBDRIVER_OPTIONS: list[string - Arguments for selenuium webdriver.
 - DRIVER_TIMEOUT: integer - Seconds for Webdriver timeout
-- DEV_MODE: boolean - Development mode active, will promt a "yes | no" in terminal
 - START_YEAR: integer - Start year for work schedule
 - START_WEEK: integer - Start week number for work schedule
 - END_YEAR: integer - End year for work schedule
 - END_WEEK: integer - End week number for work schedule
 
 
-### ./app_config/secret.py
-
-Secret values for login and sql server
+### Environment variables
 
 _login for internal pages_
 - IHELSE_USER : email for ihelse account
 - IHELSE_PWD : password for ihelse account
 
-
 _login for mingat_
 - GAT_USER : user anme for gat user
 - GAT_PASSWORD : password for gat user
-
 
 _login for mysql server_
 - MYSQL_HOST = db url: str
