@@ -121,35 +121,24 @@ class WorkbookHarvest:
     
     def __parse_shift_code(self, code_str: str):
 
-        code_str = code_str.strip()
+        code_str = code_str.strip().replace(" ","")
 
         if code_str == "": return "","",""
-        
-        if len(code_str.split("(")) == 1:
-            code_str = [str(x).strip() for x in code_str.split("-")]
-            return "-".join(code_str), code_str[0], code_str[1]
-        
-        try:
-            int(code_str[0])
-            code_str = code_str[13:]
-        except ValueError: 
-            pass
 
-        try:
-            int(code_str[-1])
-            code_str = code_str[:-13]
-        except ValueError: 
-            pass
+        if code_str.find("(") == -1:
+            return "no-code", code_str[:5], code_str[-5:]
 
-        code_str = code_str.split("(")
-        code = code_str[0].strip()
-        
-        time = [str(x).strip() for x in code_str[1].split("-")]
-        time[1] = time[1][:-1]
+        while code_str[2] == ":": code_str = code_str[11:]
+        while code_str[-3] == ":": code_str = code_str[:-11]
 
-        return code, time[0], time[1]
-    
+        code = code_str[0:code_str.find("(")]
+        start = code[-12:-7]
+        end = code[-6:-1]
+
+        return code, start, end
+
+   
     def __get_shiftcode_id(self, raw_data: str):
         code, start, end = self.__parse_shift_code(raw_data)
-        return self.shiftcodeService.get_id_by_code(code, start, end)
+        return self.shiftcodeService.get_id(code, start, end)
 
