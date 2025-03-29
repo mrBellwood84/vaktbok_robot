@@ -132,8 +132,8 @@ class WorkbookHarvest:
         while code_str[-3] == ":": code_str = code_str[:-11]
 
         code = code_str[0:code_str.find("(")]
-        start = code[-12:-7]
-        end = code[-6:-1]
+        start = code_str[-12:-7]
+        end = code_str[-6:-1]
 
         return code, start, end
 
