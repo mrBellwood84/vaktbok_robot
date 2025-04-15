@@ -7,7 +7,7 @@ def print_help():
     - backup : Store database to CVS files.
     - login : Run login procedure only
     - harvest : Login and start harvest from current week.
-    - wait_harvest : Login and await data harvest until user promt
+    - wait : Login and await data harvest until user promt
     - workbook : Store workbook 
     """
 

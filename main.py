@@ -5,7 +5,7 @@ from lib.spider import Driver, PageProcedures, WorkbookHarvest, WorkbookSave
 from lib.help import print_help
 
 
-FLAGS = ["backup", "login", "harvest", "wait_harvest", "workbook"]
+FLAGS = ["backup", "login", "harvest", "wait", "workbook"]
 
 
 def load_arg():
@@ -51,10 +51,10 @@ def main():
         workbook.save()
         return
     
-    if arg == "wait_harvest":
+    if arg == "wait":
         input(" -- Press 'ENTER' to start harvest ---")
 
-    if arg == "wait_harvest" or "harvest":
+    if arg == "wait" or "harvest":
         print(" -- Harvesting Vaktbok data --\n")
         harvester = WorkbookHarvest(driver)
         harvester.harvest()
